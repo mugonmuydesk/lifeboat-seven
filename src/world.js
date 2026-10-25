@@ -3,7 +3,7 @@ const scene=new THREE.Scene();
 let renderer;
 try {renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});}catch(error){document.getElementById('error').style.display='block';throw error;}
 renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
-const camera=new THREE.OrthographicCamera(-10,10,8,-8,.01,200);camera.position.set(13,16,19);camera.lookAt(0,0,0);
+const deckCamera=new THREE.OrthographicCamera(-10,10,8,-8,.01,650),windowCamera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.03,650);let camera=deckCamera;camera.position.set(13,16,19);camera.lookAt(0,0,0);
 const hemi=new THREE.HemisphereLight(0xc7e7ff,0x465572,2.1);scene.add(hemi);
 const key=new THREE.DirectionalLight(0xffe4bf,3.2);key.position.set(-3,12,7);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-10;key.shadow.camera.right=10;key.shadow.camera.top=9;key.shadow.camera.bottom=-9;key.shadow.normalBias=.035;key.shadow.bias=-.0002;key.shadow.radius=4;scene.add(key);
 const fill=new THREE.DirectionalLight(0x79c8ff,1.4);fill.position.set(2,7,-9);scene.add(fill);
@@ -62,17 +62,57 @@ const launchButton=cylinder(.29,.29,.14,palette.amber,0,-.03,.36,launchPanel);la
 const launchMeter=cube(1.2,.06,.03,palette.teal,0,-.5,.29,launchPanel,.01);obstacle(13.5,-1.9,2,.85);
 const shuttleText=label('L I F E B O A T   0 7',3,.33,'#c4d3d1');shuttleText.rotation.x=-Math.PI/2;shuttleText.position.set(0,.14,2.1);shuttle.add(shuttleText);
 const engines=[];for(const x of [-2.5,2.5]){cube(.95,.6,1.6,palette.hull,x,-.5,2.1,shuttle);const nozzle=cylinder(.3,.4,.4,palette.dark,x,-.5,3,shuttle);nozzle.rotation.x=Math.PI/2;const exhaust=ball(.25,.25,.6,0x83e2f2,x,-.5,3.4,shuttle);exhaust.material=new THREE.MeshBasicMaterial({color:0x83e2f2,transparent:true,opacity:0,toneMapped:false});engines.push(exhaust);}
-// Halcyon is an external 3D ship. The lounge attaches to its rear boom.
-const halcyon=new THREE.Group();halcyon.position.set(0,2,-24);scene.add(halcyon);
-cube(19,2.3,3.8,palette.hull,0,0,0,halcyon,.45);cube(5,2.9,4.5,palette.trim,-3,0,0,halcyon,.4);cube(3,1.2,3.1,palette.dark,8.8,.9,0,halcyon,.3);cube(2.7,.6,2.6,0x74bcc8,8.8,1.5,0,halcyon,.16);
-for(const x of [-8,-4,0,4]){cube(.12,.14,3.95,palette.amber,x,.7,0,halcyon);for(const z of [-2.03,2.03])for(let j=0;j<4;j++)glow(.3,.12,.04,0x9cdee0,x+j*.65,-.05,z,halcyon);}
-for(const x of [-6,2]){cube(.25,6,.3,palette.dark,x,0,0,halcyon);for(const y of [-4,4]){cube(4,2,.15,0x284e75,x,y,0,halcyon,.08);for(let i=0;i<6;i++)cube(.025,1.9,.18,0x69899b,x-1.7+i*.65,y,0,halcyon,0);}}
-for(const z of [-1.2,1.2]){const engine=cylinder(.7,.7,1.6,palette.dark,-10,0,z,halcyon);engine.rotation.z=Math.PI/2;const burn=ball(.2,.5,.5,0x72d5e8,-10.85,0,z,halcyon);burn.material=mat(0x72d5e8,0x72d5e8);}
-const hullName=label('H A L C Y O N',5,.45,'#e4e5db');hullName.position.set(1.6,.55,1.93);halcyon.add(hullName);
-cube(1.15,.7,14.2,palette.dark,-3,-1.2,-11.8,scene,.12); // visible attachment to the recreation wing
+// The lounge projects from the starboard flank of one continuous, enormous hull.
+// Its near edge touches the lounge at x=-6; its spine recedes over 200 metres.
+const halcyon=new THREE.Group();scene.add(halcyon);
+cube(40,10,230,palette.hull,-26,-7,-93,halcyon,.7);
+cube(38,.7,225,0x52697c,-26,-1.7,-93,halcyon,.25);
+// Broad armour plates and repeated human-scale fittings establish distance.
+for(let i=0;i<23;i++){
+ const z=14-i*10;
+ for(let j=0;j<4;j++){const x=-11-j*9;
+ cube(8.75,.15,9.75,(i+j)%3===0?0x6c8290:0x5d7383,x,-1.27,z,halcyon,.04);
+ }
+ cube(.22,.19,9.6,palette.amber,-6.4,-1.18,z,halcyon,.02);
+ cube(.45,.7,1.2,palette.dark,-6.4,-.85,z-3.5,halcyon,.08);
+ glow(.3,.12,.6,0x9ce8f0,-6.12,-.45,z-3.5,halcyon);
+ if(i%3===0){cube(9,1.4,4,palette.dark,-23,-.55,z,halcyon,.22);for(let j=0;j<6;j++)cube(.45,.2,3.4,0x7f949f,-26+j*1.15,.25,z,halcyon,.03);}
+}
+// Raised centreline towers, antennae and inset windows diminish into the distance.
+for(let i=0;i<7;i++){const z=-15-i*28;
+ cube(12,4.4,12,palette.hull,-36,.8,z,halcyon,.35);
+ cube(9,1.6,8,palette.trim,-36,3.8,z-1,halcyon,.25);
+ for(let j=0;j<6;j++)glow(.08,.35,.65,0xa1d9e2,-29.94,1.8,z-4+j*1.5,halcyon);
+ cube(.18,5,.18,palette.dark,-36,7,z,halcyon,.02);
+ glow(.3,.25,.3,0xffbc77,-36,9.6,z,halcyon);
+}
+// The recreation bay's load-bearing collar and underside visibly merge into the hull.
+cube(3.2,3.5,10,palette.hull,-6.8,-1.6,0,halcyon,.22);
+cube(12.8,.65,9.8,palette.dark,0,-.72,0,halcyon,.2);
+for(const z of [-3.7,3.7]){cube(8,.6,.65,palette.hull,-3,-1.4,z,halcyon,.1);cube(.3,1.8,.8,palette.trim,-5.9,-.8,z,halcyon);}
+cube(12.6,.28,.65,palette.trim,0,-.2,-4.9,halcyon,.1);
+const hullName=label('H A L C Y O N',13,1.6,'#bacbd1');hullName.rotation.x=-Math.PI/2;hullName.position.set(-17,-1.16,-22);halcyon.add(hullName);
+const bayName=label('07 / RECREATION',4.5,.45,'#c4dce4');bayName.position.set(.2,-.65,4.92);halcyon.add(bayName);
+// Reusable GPU particles: hot ejecta expands quickly, smoke lingers over each scar.
+const burstTexture=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const ctx=c.getContext('2d'),g=ctx.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.2,'rgba(255,255,255,.8)');g.addColorStop(.55,'rgba(255,255,255,.25)');g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.fillRect(0,0,64,64);return new THREE.CanvasTexture(c)})();
+function particleCloud(count,smoke){const geometry=new THREE.BufferGeometry(),position=new Float32Array(count*3),colour=new Float32Array(count*3),alpha=new Float32Array(count),size=new Float32Array(count),seeds=[];for(let j=0;j<count;j++){const theta=j*2.399963,up=.15+Math.random()*.85,speed=smoke?1+Math.random()*1.3:3+Math.random()*10;seeds.push({v:new THREE.Vector3(Math.cos(theta)*Math.sqrt(1-up*up),up,Math.sin(theta)*Math.sqrt(1-up*up)).multiplyScalar(speed),life:smoke?6+Math.random()*7:.6+Math.random()*2.8,delay:Math.random()*.16,size:smoke?2+Math.random()*3:.13+Math.random()*.55});}
+ geometry.setAttribute('position',new THREE.BufferAttribute(position,3));geometry.setAttribute('color',new THREE.BufferAttribute(colour,3));geometry.setAttribute('alpha',new THREE.BufferAttribute(alpha,1));geometry.setAttribute('particleSize',new THREE.BufferAttribute(size,1));
+ const material=new THREE.ShaderMaterial({uniforms:{map:{value:burstTexture},viewport:{value:innerHeight}},vertexShader:'attribute float alpha; attribute float particleSize; attribute vec3 color; varying float a; varying vec3 c; uniform float viewport; void main(){a=alpha;c=color;vec4 p=modelViewMatrix*vec4(position,1.); gl_Position=projectionMatrix*p; float depth=projectionMatrix[2][3]==-1.?max(.1,-p.z):1.; gl_PointSize=clamp(particleSize*viewport*projectionMatrix[1][1]/(2.*depth),1.,220.);}',fragmentShader:'uniform sampler2D map; varying float a; varying vec3 c; void main(){gl_FragColor=vec4(c,texture2D(map,gl_PointCoord).a*a);}',transparent:true,depthWrite:false,blending:smoke?THREE.NormalBlending:THREE.AdditiveBlending,toneMapped:false});
+ const points=new THREE.Points(geometry,material);points.frustumCulled=false;points.visible=false;return {points,seeds,position,colour,alpha,size,smoke};}
+function animateCloud(c,target,t){c.points.visible=t>=0&&t<14;if(!c.points.visible)return;c.points.material.uniforms.viewport.value=renderer.domElement.height;for(let j=0;j<c.seeds.length;j++){const s=c.seeds[j],age=Math.max(0,t-s.delay),f=age/s.life,k=j*3,travel=c.smoke?age:3*(1-Math.exp(-age/3));c.position[k]=target.x+s.v.x*travel;c.position[k+1]=target.y+.2+s.v.y*travel;c.position[k+2]=target.z+s.v.z*travel;c.alpha[j]=t<s.delay?0:Math.max(0,1-f)*(c.smoke?.38:1);c.size[j]=s.size*(c.smoke?1+age*.6:1+age*.12);if(c.smoke){const shade=.17+.14*Math.max(0,1-age/2);c.colour[k]=shade*1.15;c.colour[k+1]=shade;c.colour[k+2]=shade*.95;}else{c.colour[k]=1;c.colour[k+1]=Math.max(.12,.95-f);c.colour[k+2]=Math.max(.015,.65-f*1.8);}}for(const name of ['position','color','alpha','particleSize'])c.points.geometry.attributes[name].needsUpdate=true;}
 const meteorGroup=new THREE.Group();scene.add(meteorGroup);const impacts=[];
-for(let i=0;i<6;i++){const target=new THREE.Vector3(-7+i*2.7,2+(i%2)*.5,-21.5),start=target.clone().add(new THREE.Vector3(12+i*2,9+i*.7,-11));const rock=new THREE.Mesh(new THREE.IcosahedronGeometry(.28+(i%3)*.1,0),mat(0x9c8271));rock.visible=false;meteorGroup.add(rock);const tail=new THREE.Mesh(new THREE.CylinderGeometry(.025,.18,3.5,10),new THREE.MeshBasicMaterial({color:0xf5ba73,transparent:true,opacity:.55,depthWrite:false}));tail.visible=false;meteorGroup.add(tail);const flash=new THREE.Mesh(new THREE.SphereGeometry(1,16,12),new THREE.MeshBasicMaterial({color:0xffd88f,transparent:true,opacity:0,depthWrite:false,toneMapped:false}));flash.position.copy(target);meteorGroup.add(flash);const lamp=new THREE.PointLight(0xffa458,0,10);lamp.position.copy(target);meteorGroup.add(lamp);const scar=new THREE.Mesh(new THREE.CircleGeometry(.5,9),new THREE.MeshBasicMaterial({color:0x253245,side:THREE.DoubleSide}));scar.position.copy(target);scar.position.z=-21.45;scar.rotation.z=i;scar.visible=false;meteorGroup.add(scar);const fragments=[];for(let j=0;j<7;j++){const f=new THREE.Mesh(new THREE.IcosahedronGeometry(.12+(j%3)*.05,0),mat(j%2?0x917c6d:0xdca169));f.visible=false;meteorGroup.add(f);fragments.push({mesh:f,v:new THREE.Vector3(Math.sin(j*17+i)*1.5,Math.cos(j*11)*1.1,Math.sin(j*7)*1.2)})}impacts.push({start,target,rock,tail,flash,lamp,scar,fragments,time:1.5+i*.85,hit:false});}
-function updateMeteors(t){for(const a of impacts){const approach=t-a.time;if(approach>=-1.1&&approach<0){a.rock.visible=a.tail.visible=true;a.rock.position.lerpVectors(a.start,a.target,(approach+1.1)/1.1);a.rock.rotation.x+=.05;const dir=a.start.clone().sub(a.target).normalize();a.tail.position.copy(a.rock.position).addScaledVector(dir,1.8);a.tail.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);}else{a.rock.visible=a.tail.visible=false;}if(approach>=0){a.hit=true;a.scar.visible=true;const burst=Math.max(0,1-approach/1.25);a.flash.scale.setScalar(.35+(1-burst)*1.6);a.flash.material.opacity=burst*.85;a.lamp.intensity=burst*15;for(const f of a.fragments){f.mesh.visible=approach<20;f.mesh.position.copy(a.target).addScaledVector(f.v,Math.min(approach,15));f.mesh.rotation.set(approach*.3,approach*.7,approach*.2);} }} }
+for(let i=0;i<7;i++){
+ const target=new THREE.Vector3(-10-(i%3)*4,-1.12,-22-i*12),start=target.clone().add(new THREE.Vector3(32,29,13));
+ const rock=new THREE.Mesh(new THREE.IcosahedronGeometry(.6+(i%3)*.2,1),mat(0x8d7766));rock.visible=false;meteorGroup.add(rock);
+ const tail=new THREE.Mesh(new THREE.CylinderGeometry(.04,.45,9,12),new THREE.MeshBasicMaterial({color:0xffbd79,transparent:true,opacity:.65,depthWrite:false,blending:THREE.AdditiveBlending}));tail.visible=false;meteorGroup.add(tail);
+ const flash=new THREE.Mesh(new THREE.SphereGeometry(1,16,12),new THREE.MeshBasicMaterial({color:0xffdf9c,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false}));flash.position.copy(target);meteorGroup.add(flash);
+ const lamp=new THREE.PointLight(0xffa458,0,24);lamp.position.copy(target).add(new THREE.Vector3(0,2,0));meteorGroup.add(lamp);
+ const scar=new THREE.Mesh(new THREE.CircleGeometry(1.7+(i%2)*.6,11),new THREE.MeshBasicMaterial({color:0x1c2933,side:THREE.DoubleSide}));scar.position.copy(target);scar.rotation.set(-Math.PI/2,0,i);scar.visible=false;meteorGroup.add(scar);
+ const sparks=particleCloud(110,false),smoke=particleCloud(32,true);meteorGroup.add(sparks.points,smoke.points);
+ const fragments=[];for(let j=0;j<9;j++){const mesh=new THREE.Mesh(new THREE.IcosahedronGeometry(.15+(j%3)*.12,0),mat(j%2?0x607583:0xb89b79));mesh.visible=false;meteorGroup.add(mesh);fragments.push({mesh,v:new THREE.Vector3(Math.sin(j*17+i)*3,1+Math.random()*3,Math.cos(j*7)*3)});}
+ impacts.push({start,target,rock,tail,flash,lamp,scar,sparks,smoke,fragments,time:2+i*1.35,hit:false});
+}
+function updateMeteors(t){for(const a of impacts){const age=t-a.time;if(age>=-1.8&&age<0){a.rock.visible=a.tail.visible=true;a.rock.position.lerpVectors(a.start,a.target,(age+1.8)/1.8);a.rock.rotation.set(t,t*.6,t*.3);const dir=a.start.clone().sub(a.target).normalize();a.tail.position.copy(a.rock.position).addScaledVector(dir,4.3);a.tail.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);}else a.rock.visible=a.tail.visible=false;if(age>=0){a.hit=true;a.scar.visible=true;const burst=Math.max(0,1-age/.65);a.flash.scale.setScalar(.3+(1-burst)*3);a.flash.material.opacity=burst*.9;a.lamp.intensity=burst*90;animateCloud(a.sparks,a.target,age);animateCloud(a.smoke,a.target,age);for(const f of a.fragments){f.mesh.visible=age<18;f.mesh.position.copy(a.target).addScaledVector(f.v,age);f.mesh.rotation.set(age*.7,age*.9,age*.4);}}}}
 
 // Arthur: compact, rounded astronaut with an oversized visor.
 const player=new THREE.Group();player.position.set(-3.7,0,1.85);scene.add(player);player.rotation.y=Math.PI;const body=new THREE.Group();player.add(body);
