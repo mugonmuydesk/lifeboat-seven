@@ -47,7 +47,7 @@ cube(2.3,.05,.65,palette.dark,0,.105,4.2);for(const x of [-.85,-.42,0,.42,.85])c
 const floorText=label('L B  /  0 7',1.8,.45,'#c6d6d5');floorText.rotation.x=-Math.PI/2;floorText.position.set(-1.35,.094,2.9);ship.add(floorText);
 // Exterior supports and engine glow visible below the cutaway.
 for(const x of [-4.5,4.5]){cube(1.3,.6,2.6,palette.hull,x,-.75,1.4);const engine=cylinder(.37,.45,.45,palette.dark,x,-.77,2.87);engine.rotation.x=Math.PI/2;const light=cylinder(.28,.28,.035,0x65d2e0,x,-.77,3.11);light.rotation.x=Math.PI/2;light.material=mat(0x6bdde4,0x6bdde4);}
-// Freddie: compact, rounded astronaut with an oversized visor.
+// Arthur: compact, rounded astronaut with an oversized visor.
 const player=new THREE.Group();player.position.set(-1,0,1.15);scene.add(player);const body=new THREE.Group();player.add(body);
 ball(.38,.49,.29,palette.white,0,.82,0,body);cube(.57,.56,.25,palette.amber,0,.87,-.32,body,.12);cube(.58,.08,.44,palette.orange,0,.62,0,body,.04);
 ball(.45,.43,.39,palette.white,0,1.34,0,body);ball(.373,.26,.16,0x203b50,0,1.36,.31,body);ball(.305,.18,.06,0x659caa,0,1.4,.44,body);const gleam=ball(.135,.045,.018,0xc1e5dd,-.1,1.48,.49,body);gleam.rotation.z=-.2;
@@ -56,41 +56,41 @@ const legs=[],arms=[];for(const side of [-1,1]){const leg=new THREE.Group();leg.
 const shadowTex=(()=>{const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),g=x.createRadialGradient(64,64,5,64,64,62);g.addColorStop(0,'rgba(12,29,40,.35)');g.addColorStop(1,'rgba(12,29,40,0)');x.fillStyle=g;x.fillRect(0,0,128,128);return new THREE.CanvasTexture(c)})();const contact=new THREE.Mesh(new THREE.PlaneGeometry(1.3,1.3),new THREE.MeshBasicMaterial({map:shadowTex,transparent:true,depthWrite:false}));contact.rotation.x=-Math.PI/2;contact.position.y=.105;scene.add(contact);
 // Distant stars and a small moon provide depth without distracting from the deck.
 const positions=[];for(let i=0;i<500;i++){const r=35+Math.random()*30,a=Math.random()*Math.PI*2,b=Math.acos(2*Math.random()-1);positions.push(r*Math.sin(b)*Math.cos(a),r*Math.cos(b),r*Math.sin(b)*Math.sin(a))}const starsGeo=new THREE.BufferGeometry();starsGeo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));const stars=new THREE.Points(starsGeo,new THREE.PointsMaterial({color:0xb4d1e8,size:.065,transparent:true,opacity:.65,sizeAttenuation:true}));scene.add(stars);
-// Pip is a physical member of the cabin, with a persistent golden glow.
-const pip=new THREE.Group();pip.position.set(-3.6,0,.5);ship.add(pip);
-const pipBody=new THREE.Group();pip.add(pipBody);
-const wheel=cylinder(.29,.29,.3,palette.dark,0,.36,0,pip);wheel.rotation.z=Math.PI/2;
-cylinder(.1,.1,.32,palette.amber,0,.36,0,pip).rotation.z=Math.PI/2;
-cube(.74,.64,.54,palette.amber,0,.94,0,pipBody,.15);
-cube(.86,.59,.61,palette.white,0,1.48,.02,pipBody,.15);
-cube(.66,.35,.075,palette.dark,0,1.49,.35,pipBody,.09);
-for(const x of [-.17,.17])glow(.085,.14,.035,0xffd687,x,1.51,.402,pipBody);
-const smile=glow(.13,.025,.025,0xffd687,0,1.39,.405,pipBody);
-for(const side of [-1,1]){ball(.13,.13,.13,palette.dark,side*.43,1.04,0,pipBody);cube(.13,.33,.13,palette.white,side*.48,.88,.03,pipBody,.05);ball(.12,.11,.12,palette.amber,side*.48,.7,.07,pipBody);}
-cylinder(.025,.025,.27,palette.dark,.21,1.89,0,pipBody);const antenna=ball(.085,.085,.085,0xffd080,.21,2.05,0,pipBody);antenna.material=new THREE.MeshBasicMaterial({color:0xffd080,toneMapped:false});
-cube(.19,.15,.04,palette.dark,0,.98,.29,pipBody,.025);glow(.11,.045,.025,0xffd080,0,1,.32,pipBody);
-pipBody.traverse(o=>{if(o.isMesh&&o.material.color?.getHex()===palette.amber){o.material=o.material.clone();o.material.emissive.setHex(0xe9a943);o.material.emissiveIntensity=.42;}});
-obstacle(pip.position.x,pip.position.z,.88,.74);
+// Marvin is a physical member of the cabin, with a persistent golden glow.
+const marvin=new THREE.Group();marvin.position.set(-3.6,0,.5);ship.add(marvin);
+const marvinBody=new THREE.Group();marvin.add(marvinBody);
+const wheel=cylinder(.29,.29,.3,palette.dark,0,.36,0,marvin);wheel.rotation.z=Math.PI/2;
+cylinder(.1,.1,.32,palette.amber,0,.36,0,marvin).rotation.z=Math.PI/2;
+cube(.74,.64,.54,palette.amber,0,.94,0,marvinBody,.15);
+cube(.86,.59,.61,palette.white,0,1.48,.02,marvinBody,.15);
+cube(.66,.35,.075,palette.dark,0,1.49,.35,marvinBody,.09);
+for(const x of [-.17,.17])glow(.085,.14,.035,0xffd687,x,1.51,.402,marvinBody);
+const smile=glow(.13,.025,.025,0xffd687,0,1.39,.405,marvinBody);
+for(const side of [-1,1]){ball(.13,.13,.13,palette.dark,side*.43,1.04,0,marvinBody);cube(.13,.33,.13,palette.white,side*.48,.88,.03,marvinBody,.05);ball(.12,.11,.12,palette.amber,side*.48,.7,.07,marvinBody);}
+cylinder(.025,.025,.27,palette.dark,.21,1.89,0,marvinBody);const antenna=ball(.085,.085,.085,0xffd080,.21,2.05,0,marvinBody);antenna.material=new THREE.MeshBasicMaterial({color:0xffd080,toneMapped:false});
+cube(.19,.15,.04,palette.dark,0,.98,.29,marvinBody,.025);glow(.11,.045,.025,0xffd080,0,1,.32,marvinBody);
+marvinBody.traverse(o=>{if(o.isMesh&&o.material.color?.getHex()===palette.amber){o.material=o.material.clone();o.material.emissive.setHex(0xe9a943);o.material.emissiveIntensity=.42;}});
+obstacle(marvin.position.x,marvin.position.z,.88,.74);
 function auraTexture(){const c=document.createElement('canvas');c.width=c.height=128;const ctx=c.getContext('2d'),g=ctx.createRadialGradient(64,64,0,64,64,64);g.addColorStop(0,'rgba(255,205,103,.65)');g.addColorStop(.38,'rgba(255,184,63,.3)');g.addColorStop(1,'rgba(255,168,40,0)');ctx.fillStyle=g;ctx.fillRect(0,0,128,128);return new THREE.CanvasTexture(c)}
-const auraMap=auraTexture();const aura=new THREE.Sprite(new THREE.SpriteMaterial({map:auraMap,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.52}));aura.position.set(0,1.1,0);aura.scale.set(2.9,3.3,1);pip.add(aura);
-const pipPool=new THREE.Mesh(new THREE.PlaneGeometry(3,3),new THREE.MeshBasicMaterial({map:auraMap,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false,opacity:.75}));pipPool.rotation.x=-Math.PI/2;pipPool.position.y=.115;pip.add(pipPool);
-const pipRing=new THREE.Mesh(new THREE.RingGeometry(.63,.665,48),new THREE.MeshBasicMaterial({color:0xffcf72,transparent:true,opacity:.8,side:THREE.DoubleSide,depthWrite:false,toneMapped:false}));pipRing.rotation.x=-Math.PI/2;pipRing.position.y=.12;pip.add(pipRing);
-const pipLight=new THREE.PointLight(0xffbf65,2,4,2);pipLight.position.set(0,1.3,.25);pip.add(pipLight);
+const auraMap=auraTexture();const aura=new THREE.Sprite(new THREE.SpriteMaterial({map:auraMap,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.52}));aura.position.set(0,1.1,0);aura.scale.set(2.9,3.3,1);marvin.add(aura);
+const marvinPool=new THREE.Mesh(new THREE.PlaneGeometry(3,3),new THREE.MeshBasicMaterial({map:auraMap,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false,opacity:.75}));marvinPool.rotation.x=-Math.PI/2;marvinPool.position.y=.115;marvin.add(marvinPool);
+const marvinRing=new THREE.Mesh(new THREE.RingGeometry(.63,.665,48),new THREE.MeshBasicMaterial({color:0xffcf72,transparent:true,opacity:.8,side:THREE.DoubleSide,depthWrite:false,toneMapped:false}));marvinRing.rotation.x=-Math.PI/2;marvinRing.position.y=.12;marvin.add(marvinRing);
+const marvinLight=new THREE.PointLight(0xffbf65,2,4,2);marvinLight.position.set(0,1.3,.25);marvin.add(marvinLight);
 // Moving floor chevrons: 0.5 seconds in, 2 seconds held, 0.5 seconds out.
 function arrowTexture(){const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');x.strokeStyle='#ffdc84';x.shadowColor='#ffbe42';x.shadowBlur=17;x.lineWidth=10;x.lineJoin='round';x.lineCap='round';for(let i=0;i<2;i++){x.beginPath();x.moveTo(30,86);x.lineTo(64,47);x.lineTo(98,86);x.stroke()}return new THREE.CanvasTexture(c)}
-const cueOrigin=new THREE.Vector3(-1,.135,1.15),cueVector=pip.position.clone().sub(cueOrigin);cueVector.y=0;const cueLength=cueVector.length()-.85;cueVector.normalize();
+const cueOrigin=new THREE.Vector3(-1,.135,1.15),cueVector=marvin.position.clone().sub(cueOrigin);cueVector.y=0;const cueLength=cueVector.length()-.85;cueVector.normalize();
 const chevrons=[];const arrowMap=arrowTexture();for(let i=0;i<4;i++){const m=new THREE.MeshBasicMaterial({map:arrowMap,transparent:true,opacity:0,depthWrite:false,toneMapped:false,side:THREE.DoubleSide});const arrow=new THREE.Mesh(new THREE.PlaneGeometry(.64,.64),m);arrow.rotation.set(-Math.PI/2,0,0);arrow.rotateZ(Math.atan2(-cueVector.x,-cueVector.z));ship.add(arrow);chevrons.push(arrow)}
-let gameStarted=false,cueStarted=Infinity;let questState='available',dialogueOpen=false,pipArmed=true,toastUntil=0;
-const dialogue=document.getElementById('pipDialogue'),pipTag=document.getElementById('pipName'),questToast=document.getElementById('questToast'),questStatus=document.getElementById('questStatus');
-function openPipDialogue(){dialogueOpen=true;pipArmed=false;path=[];keys.clear();mouseDown=false;destination.visible=false;dialogue.hidden=false;document.body.classList.add('talking');document.getElementById('acceptQuest').focus({preventScroll:true});pipAudio.ping();pipAudio.speak(document.getElementById('pipWords').textContent);}
-function choosePipQuest(accept){if(!dialogueOpen)return;questState=accept?'accepted':'available';dialogueOpen=false;dialogue.hidden=true;document.body.classList.remove('talking');questToast.textContent=accept?'Pip: “That’s my pilot. We’ll get her steady.”':'Pip: “All right. I’ll be here when you’re ready.”';pipAudio.speak(accept?'That’s my pilot. We’ll get her steady.':'All right. I’ll be here when you’re ready.');questToast.hidden=false;toastUntil=performance.now()+6500;questStatus.hidden=!accept;canvas.focus({preventScroll:true});}
-pipTag.addEventListener('click',()=>{if(!gameStarted||dialogueOpen)return;path=routeTo(pip.position.x,pip.position.z);if(path.length){const end=path[path.length-1];destination.position.set(end.x,.12,end.z);destination.visible=true;markMoved();canvas.focus({preventScroll:true});}});
-document.getElementById('acceptQuest').addEventListener('click',()=>choosePipQuest(true));document.getElementById('rejectQuest').addEventListener('click',()=>choosePipQuest(false));
-function updatePip(now){if(!gameStarted){for(const arrow of chevrons)arrow.visible=false;return;}const elapsed=(now-cueStarted)/1000,opacity=elapsed<.5?elapsed/.5:elapsed<2.5?1:Math.max(0,1-(elapsed-2.5)/.5);for(let i=0;i<chevrons.length;i++){const distance=((i/chevrons.length+elapsed*.42)%1)*cueLength;const arrow=chevrons[i];arrow.position.copy(cueOrigin).addScaledVector(cueVector,distance);arrow.material.opacity=opacity*Math.min(1,distance/.18,(cueLength-distance)/.18);arrow.visible=opacity>0&&!dialogueOpen;}
-const distance=player.position.distanceTo(pip.position);if(distance>1.65)pipArmed=true;if(distance<1.25&&pipArmed&&!dialogueOpen&&questState==='available')openPipDialogue();
-pipBody.position.y=Math.sin(now*.0025)*.035;aura.material.opacity=.5+Math.sin(now*.002)*.055;pipPool.material.opacity=.7+Math.sin(now*.002)*.07;
-const targetAngle=Math.atan2(player.position.x-pip.position.x,player.position.z-pip.position.z);pipBody.rotation.y=targetAngle;
-const p=pip.position.clone().add(new THREE.Vector3(0,2.37,0)).project(camera);pipTag.style.left=((p.x*.5+.5)*width)+'px';pipTag.style.top=((-p.y*.5+.5)*height)+'px';
+let gameStarted=false,cueStarted=Infinity;let questState='available',dialogueOpen=false,marvinArmed=true,toastUntil=0;
+const dialogue=document.getElementById('marvinDialogue'),marvinTag=document.getElementById('marvinName'),questToast=document.getElementById('questToast'),questStatus=document.getElementById('questStatus');
+function openMarvinDialogue(){dialogueOpen=true;marvinArmed=false;path=[];keys.clear();mouseDown=false;destination.visible=false;dialogue.hidden=false;document.body.classList.add('talking');document.getElementById('acceptQuest').focus({preventScroll:true});marvinAudio.ping();marvinAudio.speak(document.getElementById('marvinWords').textContent);}
+function chooseMarvinQuest(accept){if(!dialogueOpen)return;questState=accept?'accepted':'available';dialogueOpen=false;dialogue.hidden=true;document.body.classList.remove('talking');questToast.textContent=accept?'Marvin: “That’s my pilot. We’ll get her steady.”':'Marvin: “All right. I’ll be here when you’re ready.”';marvinAudio.speak(accept?'That’s my pilot. We’ll get her steady.':'All right. I’ll be here when you’re ready.');questToast.hidden=false;toastUntil=performance.now()+6500;questStatus.hidden=!accept;canvas.focus({preventScroll:true});}
+marvinTag.addEventListener('click',()=>{if(!gameStarted||dialogueOpen)return;path=routeTo(marvin.position.x,marvin.position.z);if(path.length){const end=path[path.length-1];destination.position.set(end.x,.12,end.z);destination.visible=true;markMoved();canvas.focus({preventScroll:true});}});
+document.getElementById('acceptQuest').addEventListener('click',()=>chooseMarvinQuest(true));document.getElementById('rejectQuest').addEventListener('click',()=>chooseMarvinQuest(false));
+function updateMarvin(now){if(!gameStarted){for(const arrow of chevrons)arrow.visible=false;return;}const elapsed=(now-cueStarted)/1000,opacity=elapsed<.5?elapsed/.5:elapsed<2.5?1:Math.max(0,1-(elapsed-2.5)/.5);for(let i=0;i<chevrons.length;i++){const distance=((i/chevrons.length+elapsed*.42)%1)*cueLength;const arrow=chevrons[i];arrow.position.copy(cueOrigin).addScaledVector(cueVector,distance);arrow.material.opacity=opacity*Math.min(1,distance/.18,(cueLength-distance)/.18);arrow.visible=opacity>0&&!dialogueOpen;}
+const distance=player.position.distanceTo(marvin.position);if(distance>1.65)marvinArmed=true;if(distance<1.25&&marvinArmed&&!dialogueOpen&&questState==='available')openMarvinDialogue();
+marvinBody.position.y=Math.sin(now*.0025)*.035;aura.material.opacity=.5+Math.sin(now*.002)*.055;marvinPool.material.opacity=.7+Math.sin(now*.002)*.07;
+const targetAngle=Math.atan2(player.position.x-marvin.position.x,player.position.z-marvin.position.z);marvinBody.rotation.y=targetAngle;
+const p=marvin.position.clone().add(new THREE.Vector3(0,2.37,0)).project(camera);marvinTag.style.left=((p.x*.5+.5)*width)+'px';marvinTag.style.top=((-p.y*.5+.5)*height)+'px';
 if(toastUntil&&now>toastUntil){questToast.hidden=true;toastUntil=0;}canvas.dataset.quest=questState;canvas.dataset.dialogue=String(dialogueOpen);canvas.dataset.cue=elapsed<.5?'fade-in':elapsed<2.5?'hold':elapsed<3?'fade-out':'finished';}
 
 // Screen-relative walking. Camera is deliberately fixed as the game's isometric view.
@@ -115,9 +115,9 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-last)/10
 if(!gameStarted||dialogueOpen){path=[];keys.clear();}else if(kx||ky){dx=right.x*kx+up.x*ky;dz=right.z*kx+up.z*ky;}else if(path.length){const p=path[0],x=p.x-player.position.x,z=p.z-player.position.z;if(Math.hypot(x,z)<.008){path.shift();if(!path.length)destination.visible=false;}else{dx=x;dz=z;}}
 const length=Math.hypot(dx,dz),oldX=player.position.x,oldZ=player.position.z;if(length>.001){const speed=Math.min(3.25*dt,path.length?length:Infinity);dx=dx/length*speed;dz=dz/length*speed;if(walkable(player.position.x+dx,player.position.z+dz)){player.position.x+=dx;player.position.z+=dz;}else{if(walkable(player.position.x+dx,player.position.z))player.position.x+=dx;if(walkable(player.position.x,player.position.z+dz))player.position.z+=dz;}}
 const distance=Math.hypot(player.position.x-oldX,player.position.z-oldZ),moving=distance>.0001;motion=THREE.MathUtils.damp(motion,moving?1:0,14,dt);if(moving){walkPhase+=distance*10;const angle=Math.atan2(player.position.x-oldX,player.position.z-oldZ),diff=Math.atan2(Math.sin(angle-player.rotation.y),Math.cos(angle-player.rotation.y));player.rotation.y+=diff*Math.min(1,dt*16);}body.position.y=Math.abs(Math.sin(walkPhase))*motion*.065+Math.sin(now*.002)*.009*(1-motion);body.rotation.z=Math.sin(walkPhase)*motion*.035;legs[0].rotation.x=Math.sin(walkPhase)*motion*.6;legs[1].rotation.x=-Math.sin(walkPhase)*motion*.6;arms[0].rotation.x=-Math.sin(walkPhase)*motion*.35;arms[1].rotation.x=Math.sin(walkPhase)*motion*.35;contact.position.set(player.position.x,.105,player.position.z);destination.material.opacity=.55+Math.sin(now*.006)*.2;
-const screen=player.position.clone().add(new THREE.Vector3(0,2,0)).project(camera);nameTag.style.left=((screen.x*.5+.5)*width)+'px';nameTag.style.top=((-screen.y*.5+.5)*height)+'px';stars.rotation.y=now*.000002;updatePip(now);renderer.render(scene,camera);
+const screen=player.position.clone().add(new THREE.Vector3(0,2,0)).project(camera);nameTag.style.left=((screen.x*.5+.5)*width)+'px';nameTag.style.top=((-screen.y*.5+.5)*height)+'px';stars.rotation.y=now*.000002;updateMarvin(now);renderer.render(scene,camera);
 // Visible canvas metadata supports checking actual movement without exposing game internals.
 canvas.dataset.position=player.position.x.toFixed(3)+','+player.position.z.toFixed(3);canvas.dataset.walking=moving?'true':'false';
 }requestAnimationFrame(frame);
 
-document.getElementById('startAdventure').addEventListener('click',()=>{if(gameStarted)return;gameStarted=true;cueStarted=performance.now();document.getElementById('startOverlay').hidden=true;document.body.classList.remove('not-started');pipAudio.unlock();pipAudio.ping();const line='Freddie! Over here. I need a hand.';document.getElementById('hint').textContent='Pip: “'+line+'”';pipAudio.speak(line);canvas.focus({preventScroll:true});});
+document.getElementById('startAdventure').addEventListener('click',()=>{if(gameStarted)return;gameStarted=true;cueStarted=performance.now();document.getElementById('startOverlay').hidden=true;document.body.classList.remove('not-started');marvinAudio.unlock();marvinAudio.ping();const line='Arthur! Over here. I need a hand.';document.getElementById('hint').textContent='Marvin: “'+line+'”';marvinAudio.speak(line);canvas.focus({preventScroll:true});});
