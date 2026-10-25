@@ -156,3 +156,20 @@ const waterLabel=label('2 L / 6 L',.64,.15,'#e0f4ef');waterLabel.position.set(0,
 cube(.18,.08,.23,palette.teal,0,.68,.48,cooler);cube(.58,.05,.42,palette.dark,0,.24,.45,cooler);cylinder(.105,.085,.23,palette.white,0,.38,.47,cooler);obstacle(9.4,1.75,1,.88);
 
 const cupWater=cylinder(.08,.08,.012,0x6bcbe3,0,.46,.47,cooler);cupWater.visible=false;
+
+// Shared live feed on two physical wall screens: Captain Mara, in pink.
+const commsCanvas=document.createElement('canvas');commsCanvas.width=768;commsCanvas.height=432;
+const commsContext=commsCanvas.getContext('2d'),commsTexture=new THREE.CanvasTexture(commsCanvas);commsTexture.colorSpace=THREE.SRGBColorSpace;
+function commsScreen(parent,x,y,z){const group=new THREE.Group();group.position.set(x,y,z);parent.add(group);cube(3.35,1.96,.19,palette.dark,0,0,0,group,.12);const face=new THREE.Mesh(new THREE.PlaneGeometry(3.12,1.75),new THREE.MeshBasicMaterial({map:commsTexture,toneMapped:false}));face.position.z=.11;group.add(face);return group;}
+const loungeComms=commsScreen(lounge,-4.35,1.7,-4.43),shuttleComms=commsScreen(shuttle,0,1.45,-2.78);
+function drawComms(t,on,speaking){const c=commsContext;c.fillStyle='#101e32';c.fillRect(0,0,768,432);c.strokeStyle=on?'#c96b9e':'#345266';c.lineWidth=3;c.strokeRect(14,14,740,404);c.fillStyle=on?'#f1a2cb':'#779da9';c.font='bold 24px monospace';c.textAlign='left';c.fillText(on?'● INCOMING / CAPTAIN MARA':'HALCYON / CREW COMMUNICATIONS',35,53);
+ if(on){c.fillStyle='#a94f82';c.fillRect(274,290,220,105);c.fillStyle='#e7a4cd';c.beginPath();c.roundRect(244,112,280,202,38);c.fill();c.fillStyle='#773859';c.fillRect(373,76,22,38);c.fillStyle='#ffd9ef';c.beginPath();c.arc(384,72,14,0,Math.PI*2);c.fill();c.fillStyle='#342039';c.beginPath();c.roundRect(268,143,232,125,24);c.fill();const blink=Math.sin(t*.8)> .994;c.fillStyle='#fff1fc';for(const x of [324,445]){c.beginPath();c.ellipse(x,187,15,blink?3:22,0,0,Math.PI*2);c.fill();}c.fillStyle='#efa5d1';c.beginPath();c.roundRect(351,229,66,speaking?8+Math.abs(Math.sin(t*14))*15:7,5);c.fill();c.fillStyle='#ffd3eb';c.fillRect(366,330,37,22);c.font='18px monospace';c.fillText('COMMAND CHANNEL',35,390);for(let i=0;i<15;i++){const h=speaking?6+Math.abs(Math.sin(t*12+i*.9))*26:5;c.fillRect(566+i*9,385-h,5,h);}}
+ else{c.textAlign='center';c.font='bold 52px monospace';c.fillStyle='#83aeb9';c.fillText('H A L C Y O N',384,215);c.font='20px monospace';c.fillStyle='#64828f';c.fillText('CHANNEL OPEN · STANDING BY',384,265);}
+ commsTexture.needsUpdate=true;}
+drawComms(0,false,false);
+// A separate inner airlock belongs to the shuttle and travels with it.
+for(const z of [-1.3,1.3])cube(.28,2.8,.25,palette.hull,-3.58,1.4,z,shuttle);cube(.28,.23,2.85,palette.trim,-3.58,2.85,0,shuttle);
+const shuttleDoor=new THREE.Group();shuttleDoor.position.set(-3.58,2.9,0);shuttle.add(shuttleDoor);cube(.18,2.6,2.35,palette.dark,0,1.4,0,shuttleDoor);cube(.21,.16,2.1,palette.amber,0,1.5,0,shuttleDoor);shuttleDoor.visible=false;
+
+const antennaGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:auraMap,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:0}));antennaGlow.position.copy(antenna.position);antennaGlow.scale.set(.8,.8,1);marvinBody.add(antennaGlow);
+const antennaLight=new THREE.PointLight(0xffc65e,0,2);antennaLight.position.copy(antenna.position);marvinBody.add(antennaLight);
