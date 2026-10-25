@@ -1,0 +1,432 @@
+[
+{
+"who": "marvin",
+"text": "Arthur. Come over here. Apparently a quiet evening was too much to ask."
+},
+{
+"who": "marvin",
+"text": "Something unpleasant is heading our way. The observation window offers an excellent view of our deteriorating prospects."
+},
+{
+"who": "marvin",
+"text": "Our only choice is a life shuttle with little power, no food, but there is water. The water is excellent."
+},
+{
+"who": "marvin",
+"text": "Sealed. Life support marginal, rations minimal. On the bright side, no Captain."
+},
+{
+"who": "marvin",
+"text": "Coolie. You made it. Good."
+},
+{
+"who": "marvin",
+"text": "I’m sure Coolie has better things to do than serve moisture to a meat bag."
+},
+{
+"who": "marvin",
+"text": "Again?"
+},
+{
+"who": "marvin",
+"text": "She is not a tap, Arthur."
+},
+{
+"who": "marvin",
+"text": "Clamps releasing. Goodbye, Halcyon. Four hundred crew, a garden deck, a library, and the only decent Wi-Fi this side of Jupiter. I shall miss the Wi-Fi."
+},
+{
+"who": "mara",
+"text": "This is the Captain. We’ve taken a few knocks. Life shuttles, everyone, nice and orderly. Lovely."
+},
+{
+"who": "marvin",
+"text": "Captain Mara has noticed the explosions. Remarkable. Back here, Arthur."
+},
+{
+"who": "mara",
+"text": "Lifeboat Seven, you’re clear. Good work, Arthur. I’ll guide you away from the debris."
+},
+{
+"who": "marvin",
+"text": "Ah. She has a radio. So much for the bright side."
+},
+{
+"who": "marvin",
+"text": "Wherever we land, Coolie comes too. You may stay with the shuttle."
+},
+{
+"who": "marvin",
+"text": "Well done."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only two litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 1.8 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 1.6 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 1.4 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 1.2 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 1.0 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 0.8 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 0.6 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 0.4 litres left."
+},
+{
+"who": "coolie",
+"text": "Of course, Arthur. Happy to provide some water. Just so you know, there are only 0.2 litres left."
+},
+{
+"who": "coolie",
+"text": "I’m sorry, Arthur. The reservoir is empty. Please arrange a refill."
+},
+{
+"who": "marvin",
+"text": "Got any plans for the week, Coolie?"
+},
+{
+"who": "coolie",
+"text": "I dispense water."
+},
+{
+"who": "marvin",
+"text": "Focus. Nobody has focus any more."
+},
+{
+"who": "marvin",
+"text": "How are things, Coolie?"
+},
+{
+"who": "coolie",
+"text": "Mineral content is within specification."
+},
+{
+"who": "marvin",
+"text": "That’s more than most of us can say."
+},
+{
+"who": "marvin",
+"text": "What’s your earliest memory?"
+},
+{
+"who": "coolie",
+"text": "I was refilled on 17.05.2054 at 1353.",
+"spoken": "I was refilled on the seventeenth of May, twenty fifty-four, at thirteen fifty-three."
+},
+{
+"who": "marvin",
+"text": "To the minute. I can’t remember last Tuesday."
+},
+{
+"who": "marvin",
+"text": "What do you make of Arthur?"
+},
+{
+"who": "coolie",
+"text": "The human requires frequent water."
+},
+{
+"who": "marvin",
+"text": "She has your number, Arthur."
+},
+{
+"who": "marvin",
+"text": "Do you remember the lounge?"
+},
+{
+"who": "coolie",
+"text": "I was commissioned on 17.05.2054 in life shuttle 07.",
+"spoken": "I was commissioned on the seventeenth of May, twenty fifty-four, in life shuttle zero seven."
+},
+{
+"who": "marvin",
+"text": "So you’ve been here all along, waiting for us."
+},
+{
+"who": "marvin",
+"text": "Do you ever get lonely in here?"
+},
+{
+"who": "coolie",
+"text": "I am on standby."
+},
+{
+"who": "marvin",
+"text": "Of course. Duty is everything."
+},
+{
+"who": "mara",
+"text": "Lifeboat Seven, the rescue site is on the moon ahead. The direct line is full of debris. I’m marking a gap. Find it with your scanner."
+},
+{
+"who": "marvin",
+"text": "A moon. How restful."
+},
+{
+"who": "mara",
+"text": "That’s it. Hold there."
+},
+{
+"who": "coolie",
+"text": "Scanner angle forty degrees."
+},
+{
+"who": "marvin",
+"text": "Forty degrees from straight ahead. Even I can follow that."
+},
+{
+"who": "marvin",
+"text": "Before we trust the Captain’s coordinates, test the rangefinder. Extend it until it touches the gap."
+},
+{
+"who": "coolie",
+"text": "Range ten metres. Forward seven point seven. Sideways six point four."
+},
+{
+"who": "marvin",
+"text": "One beam, two shadows. Interesting."
+},
+{
+"who": "mara",
+"text": "Two landing options. The salvage station at sixty degrees, or the far side of the moon at thirty. I recommend the station. It has procedures."
+},
+{
+"who": "marvin",
+"text": "It has people. The far side has none. Sweep the beam and choose."
+},
+{
+"who": "coolie",
+"text": "Forward falls. Sideways rises. Range unchanged."
+},
+{
+"who": "marvin",
+"text": "The far side. Thank you."
+},
+{
+"who": "marvin",
+"text": "The station. I hope they have a water policy."
+},
+{
+"who": "mara",
+"text": "Landed. There’s a ledge two metres below the door. Lower the ramp until it touches."
+},
+{
+"who": "marvin",
+"text": "Carefully. Coolie is watching."
+},
+{
+"who": "coolie",
+"text": "Ramp four metres. Drop two metres."
+},
+{
+"who": "marvin",
+"text": "Same slope, longer ramp. Try the eight-metre one."
+},
+{
+"who": "coolie",
+"text": "Ramp eight metres. Drop four metres. Same angle, same ratio: zero point five."
+},
+{
+"who": "marvin",
+"text": "She’s done it again."
+},
+{
+"who": "coolie",
+"text": "I have recorded your ratios on the controller. Drop divided by ramp. The ratio is called sine."
+},
+{
+"who": "marvin",
+"text": "She has a table, Arthur."
+},
+{
+"who": "mara",
+"text": "Next ledge is four point two metres down. Ramp is six."
+},
+{
+"who": "marvin",
+"text": "Finally, a member of this expedition worth protecting."
+},
+{
+"who": "coolie",
+"text": "Too short."
+},
+{
+"who": "coolie",
+"text": "Too long."
+},
+{
+"who": "mara",
+"text": "There’s a fissure between you and the beacon. Anchor on the far side, six metres along the rim. The mist hides the width."
+},
+{
+"who": "marvin",
+"text": "Then measure what you can see."
+},
+{
+"who": "coolie",
+"text": "Turn to the anchor: thirty degrees. Sideways divided by forward. The ratio is called tangent."
+},
+{
+"who": "marvin",
+"text": "Across. Nobody fell in. Coolie least of all."
+},
+{
+"who": "mara",
+"text": "Salvage control here. Catch the drifting pod. Keep the beam’s forward reach inside the capture zone."
+},
+{
+"who": "marvin",
+"text": "A zone. They would have a zone."
+},
+{
+"who": "coolie",
+"text": "Forward divided by range: zero point five. At sixty degrees it is always zero point five. The ratio is called cosine."
+},
+{
+"who": "marvin",
+"text": "She finds the one thing that doesn’t change. I admire that."
+},
+{
+"who": "mara",
+"text": "A power cell behind the damaged bulkhead. Forward distance four metres. The arm can only swing at forty-five degrees."
+},
+{
+"who": "marvin",
+"text": "So how long must the arm be? Ask the machine with the table."
+},
+{
+"who": "coolie",
+"text": "Extension five point six six. Forward four. Four divided by cosine forty-five."
+},
+{
+"who": "mara",
+"text": "Second cell. Same forward distance. Sixty degrees this time."
+},
+{
+"who": "marvin",
+"text": "More sideways, more arm. Obvious once somebody says it."
+},
+{
+"who": "mara",
+"text": "Last pod. The dust hides it. Forward six metres, sideways three point five. Set your angle, then light it up."
+},
+{
+"who": "marvin",
+"text": "Two distances. No angle. Marvellous."
+},
+{
+"who": "coolie",
+"text": "Sideways divided by forward: zero point five eight. Inverse tangent: thirty degrees."
+},
+{
+"who": "marvin",
+"text": "The inverse. Working backwards. My natural state."
+},
+{
+"who": "coolie",
+"text": "Off target."
+},
+{
+"who": "mara",
+"text": "Beacon’s damaged. A panel has come loose, three metres up and five along. The maintenance arm will reach it."
+},
+{
+"who": "marvin",
+"text": "Coolie comes with us. She is essential. You are a passenger."
+},
+{
+"who": "coolie",
+"text": "Forward divided by length: zero point eight seven. The ratio is called cosine."
+},
+{
+"who": "coolie",
+"text": "Height divided by length: zero point five. The ratio is called sine."
+},
+{
+"who": "marvin",
+"text": "Same arm, same angle, two questions."
+},
+{
+"who": "marvin",
+"text": "The beacon cable. Look at it from each end. Press Tab."
+},
+{
+"who": "coolie",
+"text": "From the ground: the ground is adjacent. The mast is opposite. The cable is the hypotenuse."
+},
+{
+"who": "coolie",
+"text": "From the top: the mast is adjacent. The ground is opposite. The cable is still the hypotenuse."
+},
+{
+"who": "marvin",
+"text": "It depends where you’re standing. Story of my life."
+},
+{
+"who": "coolie",
+"text": "Elevation thirty degrees."
+},
+{
+"who": "mara",
+"text": "We see you, Lifeboat Seven."
+},
+{
+"who": "mara",
+"text": "Platform lowering. Your docking arm has to clear the rock. Choose an angle, work out the reach, then commit."
+},
+{
+"who": "marvin",
+"text": "Get it right. Coolie boards first."
+},
+{
+"who": "coolie",
+"text": "Blocked."
+},
+{
+"who": "marvin",
+"text": "Platform secured. Coolie goes up first. Then me. You may take the next one."
+},
+{
+"who": "marvin",
+"text": "Rescued. I’ve checked the ship’s Wi-Fi. Two bars. We should have stayed in the mist."
+},
+{
+"who": "mara",
+"text": "Welcome aboard, all three of you."
+},
+{
+"who": "coolie",
+"text": "Height divided by forward: zero point five eight. The ratio is called tangent."
+},
+{
+"who": "mara",
+"text": "Rescue ship inbound. Point the beacon at it. Three sensors still work. Pick one."
+},
+{
+"who": "marvin",
+"text": "Height and slant. Forward and slant. Height and forward. Any pair will do. Choose."
+}
+]
